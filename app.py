@@ -1,6 +1,6 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QLabel
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import QPixmap, QIcon, QFont
 from PyQt6 import QtCore
 
 
@@ -9,6 +9,8 @@ class JanelaPrincipal(QWidget):
         super().__init__()
         self.setWindowTitle("Criptografia de Cesar")
         self.setFixedSize(700, 467)
+        self.setWindowIcon(QIcon("images/icone_do_sistema"))
+        self.setWindowOpacity(0.90)
         self.interface()
 
     def interface(self):
