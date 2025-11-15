@@ -22,6 +22,25 @@ class JanelaPrincipal(QWidget):
         self.label.resize(self.size())  # Define o tamanho inicial
         self.label.setScaledContents(False)
 
+        # Caixa de mensagem -> Será utilizada para receber a mensagem
+        self.texto = QTextEdit(self)
+        self.texto.setFixedWidth(280)
+        self.texto.setFixedHeight(80)
+        self.texto.move(220, 300)
+        argumentos = QLabel("Insira a mensagem:", self)
+        argumentos.setFont(QFont("Times New Roman", 12))
+        argumentos.setStyleSheet("color: white; font-style: negrito;")
+        argumentos.move(220, 280)
+
+        # Método que o sistema irá empregar (criptografia/descriptografia)
+        self.seleciona_tema1 = QRadioButton("Criptografar:", self)
+        self.seleciona_tema1.setStyleSheet("color: white; background-color: none;")
+        self.seleciona_tema1.move(220, 390)
+        self.seleciona_tema1.setChecked(True)
+        self.seleciona_tema2 = QRadioButton("Descriptografar:", self)
+        self.seleciona_tema2.setStyleSheet("color: white; background-color: none;")
+        self.seleciona_tema2.move(320, 390)
+
     def resizeEvent(self, event):
         if hasattr(self, 'original_pixmap') and not self.original_pixmap.isNull():
             scaled = self.original_pixmap.scaled(
