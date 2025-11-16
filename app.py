@@ -1,3 +1,5 @@
+import os
+
 import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QPixmap, QIcon, QFont
@@ -25,11 +27,11 @@ class JanelaPrincipal(QWidget):
         with open("log/mensagem.txt", mode="r", encoding="utf-8") as arquivo:
             conteudo = arquivo.read().split()
 
-        # criptografar ou descriptografar
-        if self.criptografar_msg.isChecked():
-            criptografar(conteudo)
-        else:
-            descriptografar(conteudo)
+            # criptografar ou descriptografar
+            if self.criptografar_msg.isChecked():
+                criptografar(conteudo)
+            else:
+                descriptografar(conteudo)
 
     def interface(self):
         self.label = QLabel(self)
@@ -58,11 +60,6 @@ class JanelaPrincipal(QWidget):
         self.descriptografar_msg = QRadioButton("Descriptografar:", self)
         self.descriptografar_msg.setStyleSheet("color: white; background-color: none;")
         self.descriptografar_msg.move(350, 390)
-
-        # self.salvar_checkbox = QCheckBox('Salvar informações', self)
-        # self.salvar_checkbox.move(100, 130)
-        # self.salvar_checkbox.clicked.connect(self.salva_dados)
-        # self.salvar_checkbox.setStyleSheet("color: black; background-color: none;")
 
         # Enviar mensagem
         botao1 = QPushButton("Submeter", self)
