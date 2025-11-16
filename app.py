@@ -34,6 +34,7 @@ class JanelaPrincipal(QWidget):
                 descriptografar(conteudo)
 
     def interface(self):
+        # plano de fundo do sistema
         self.label = QLabel(self)
         self.original_pixmap = QPixmap("images/soldado_romano_mensageiro.png")
         if self.original_pixmap.isNull():
@@ -61,12 +62,13 @@ class JanelaPrincipal(QWidget):
         self.descriptografar_msg.setStyleSheet("color: white; background-color: none;")
         self.descriptografar_msg.move(350, 390)
 
-        # Enviar mensagem
+        # Enviar mensagem para ser criptograda ou descriptografada
         botao1 = QPushButton("Submeter", self)
         botao1.setStyleSheet("color: white; background-color: gray;")
         botao1.move(320, 420)
         botao1.clicked.connect(self.metodo)
 
+    # Redimensiona a imagem para ficar centralizada no conteúdo
     def resizeEvent(self, event):
         if hasattr(self, 'original_pixmap') and not self.original_pixmap.isNull():
             scaled = self.original_pixmap.scaled(
