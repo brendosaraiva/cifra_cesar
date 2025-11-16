@@ -2,7 +2,7 @@ from criptografia import alfabeto, acentos_minusculos, acentos_maiusculos, espec
 
 
 def descriptografar(carta):
-    with open("log/descriptografar.txt", mode="w", encoding="utf-8") as arquivo:
+    with open("log/mensagem_descriptografada.txt", mode="w", encoding="utf-8") as arquivo:
         vl = ''
         separador = ", "
         novas_letras = []
@@ -46,6 +46,7 @@ def descriptografar(carta):
         arquivo.write(frase)
 
 
-with open("log/mensagem.txt", mode="r", encoding="utf-8") as arquivo:
-    carta = arquivo.read().split()
-    descriptografar(carta)
+if __name__ == "__main__":
+    with open("log/mensagem.txt", mode="r", encoding="utf-8") as arquivo:
+        carta = arquivo.read().split()
+        descriptografar(carta)

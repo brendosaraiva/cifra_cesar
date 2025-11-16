@@ -35,7 +35,7 @@ alfabeto = {
 
 # Criptografar
 def criptografar(carta):
-    with open("log/mensagem.txt", mode="w", encoding="utf-8") as arquivo:
+    with open("log/mensagem_criptografada.txt", mode="w", encoding="utf-8") as arquivo:
         "vl -> Velha letra"
         vl = ''
         separador = ", "
@@ -81,6 +81,7 @@ def criptografar(carta):
         arquivo.write(frase)
 
 
-with open("log/teste.txt", mode="r", encoding="utf-8") as arquivo:
-    carta = arquivo.read().split()
-    criptografar(carta)
+if __name__ == "__main__":
+    with open("log/teste.txt", mode="r", encoding="utf-8") as arquivo:
+        carta = arquivo.read().split()
+        criptografar(carta)

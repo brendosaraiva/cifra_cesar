@@ -3,6 +3,9 @@ from PyQt6.QtWidgets import *
 from PyQt6.QtGui import QPixmap, QIcon, QFont
 from PyQt6 import QtCore
 
+from criptografia import criptografar
+from descriptografia import descriptografar
+
 
 class JanelaPrincipal(QWidget):
     def __init__(self):
@@ -12,6 +15,21 @@ class JanelaPrincipal(QWidget):
         self.setWindowIcon(QIcon("images/icone_do_sistema"))
         self.setWindowOpacity(0.90)
         self.interface()
+
+    def metodo(self):
+        # Escreve o conteúdo no arquivo
+        with open("log/mensagem.txt", mode="w", encoding="utf-8") as arquivo:
+            arquivo.write(self.texto.toPlainText())
+
+        # Lê o conteúdo em um bloco separado
+        with open("log/mensagem.txt", mode="r", encoding="utf-8") as arquivo:
+            conteudo = arquivo.read().split()
+
+        # criptografar ou descriptografar
+        if self.criptografar_msg.isChecked():
+            criptografar(conteudo)
+        else:
+            descriptografar(conteudo)
 
     def interface(self):
         self.label = QLabel(self)
@@ -28,18 +46,29 @@ class JanelaPrincipal(QWidget):
         self.texto.setFixedHeight(80)
         self.texto.move(220, 300)
         argumentos = QLabel("Insira a mensagem:", self)
-        argumentos.setFont(QFont("Times New Roman", 12))
+        argumentos.setFont(QFont("Times New Roman", 14))
         argumentos.setStyleSheet("color: white; font-style: negrito;")
-        argumentos.move(220, 280)
+        argumentos.move(280, 275)
 
         # Método que o sistema irá empregar (criptografia/descriptografia)
-        self.seleciona_tema1 = QRadioButton("Criptografar:", self)
-        self.seleciona_tema1.setStyleSheet("color: white; background-color: none;")
-        self.seleciona_tema1.move(220, 390)
-        self.seleciona_tema1.setChecked(True)
-        self.seleciona_tema2 = QRadioButton("Descriptografar:", self)
-        self.seleciona_tema2.setStyleSheet("color: white; background-color: none;")
-        self.seleciona_tema2.move(320, 390)
+        self.criptografar_msg = QRadioButton("Criptografar:", self)
+        self.criptografar_msg.setStyleSheet("color: white; background-color: none;")
+        self.criptografar_msg.move(250, 390)
+        self.criptografar_msg.setChecked(True)
+        self.descriptografar_msg = QRadioButton("Descriptografar:", self)
+        self.descriptografar_msg.setStyleSheet("color: white; background-color: none;")
+        self.descriptografar_msg.move(350, 390)
+
+        # self.salvar_checkbox = QCheckBox('Salvar informações', self)
+        # self.salvar_checkbox.move(100, 130)
+        # self.salvar_checkbox.clicked.connect(self.salva_dados)
+        # self.salvar_checkbox.setStyleSheet("color: black; background-color: none;")
+
+        # Enviar mensagem
+        botao1 = QPushButton("Submeter", self)
+        botao1.setStyleSheet("color: white; background-color: gray;")
+        botao1.move(320, 420)
+        botao1.clicked.connect(self.metodo)
 
     def resizeEvent(self, event):
         if hasattr(self, 'original_pixmap') and not self.original_pixmap.isNull():
@@ -50,6 +79,7 @@ class JanelaPrincipal(QWidget):
             )
             self.label.setPixmap(scaled)
         super().resizeEvent(event)
+
 
 app = QApplication(sys.argv)
 janela = JanelaPrincipal()
